@@ -1,0 +1,131 @@
+:root {
+  --font-cormorant: "Cormorant Garamond", serif;
+  --font-eb-garamond: "EB Garamond", Georgia, serif;
+  --font-amiri: "Amiri", serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #0e1411;
+  font-family: var(--font-eb-garamond);
+  color: #e9e1cf;
+}
+
+::selection {
+  background: rgba(201, 162, 75, 0.3);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: rgba(167, 159, 140, 0.55);
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: rgba(201, 162, 75, 0.85) !important;
+}
+
+select option {
+  background: #141c18;
+  color: #f0e9da;
+}
+
+@keyframes zsSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes zsFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-14px);
+  }
+}
+
+@keyframes zsTwinkle {
+  0%,
+  100% {
+    opacity: 0.15;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes zsPulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(201, 162, 75, 0);
+  }
+  50% {
+    box-shadow: 0 0 30px 2px rgba(201, 162, 75, 0.18);
+  }
+}
+
+/* sweeping highlight across the foil cover, hinting it is tappable */
+@keyframes zsShimmer {
+  0% {
+    transform: translateX(-120%) skewX(-18deg);
+  }
+  100% {
+    transform: translateX(220%) skewX(-18deg);
+  }
+}
+
+/* the foil cover breaking away on tap */
+@keyframes zsFoilAway {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+    filter: brightness(1);
+  }
+  30% {
+    opacity: 1;
+    transform: scale(1.04);
+    filter: brightness(1.6);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.14);
+    filter: brightness(1);
+  }
+}
+
+/* a single star drifting down the screen */
+@keyframes zsStarFall {
+  0% {
+    transform: translate3d(0, -12vh, 0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate3d(var(--zs-drift, 0px), 112vh, 0) rotate(220deg);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-stars] {
+    display: none !important;
+  }
+}
