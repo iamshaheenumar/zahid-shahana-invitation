@@ -87,22 +87,50 @@ select option {
   }
 }
 
-/* the foil cover breaking away on tap */
-@keyframes zsFoilAway {
+/* the wax seal flaring and breaking apart on tap */
+@keyframes zsSealBreak {
   0% {
-    opacity: 1;
     transform: scale(1);
+    opacity: 1;
     filter: brightness(1);
   }
-  30% {
+  40% {
+    transform: scale(1.32);
     opacity: 1;
-    transform: scale(1.04);
-    filter: brightness(1.6);
+    filter: brightness(1.9) drop-shadow(0 0 16px rgba(244, 227, 173, 0.9));
+  }
+  100% {
+    transform: scale(2.1);
+    opacity: 0;
+    filter: brightness(1);
+  }
+}
+
+/* a bloom of light at the seam as the seal gives way */
+@keyframes zsFlash {
+  0% {
+    transform: scale(0.35);
+    opacity: 0;
+  }
+  35% {
+    opacity: 0.95;
+  }
+  100% {
+    transform: scale(2.7);
+    opacity: 0;
+  }
+}
+
+/* warm light spilling over the card as the doors swing open */
+@keyframes zsRevealGlow {
+  0% {
+    opacity: 0;
+  }
+  45% {
+    opacity: 0.85;
   }
   100% {
     opacity: 0;
-    transform: scale(1.14);
-    filter: brightness(1);
   }
 }
 
@@ -127,5 +155,11 @@ select option {
 @media (prefers-reduced-motion: reduce) {
   [data-stars] {
     display: none !important;
+  }
+  /* skip the door choreography — just clear the cover */
+  [data-cover],
+  [data-cover] * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.25s !important;
   }
 }

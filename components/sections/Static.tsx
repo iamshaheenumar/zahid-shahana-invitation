@@ -98,7 +98,7 @@ export function DateBlock() {
             color: "#a89263",
           }}
         >
-          Wednesday · 4:00 – 9:00 PM
+          Wednesday · 6:00 – 9:00 PM
         </p>
       </div>
     </RevealSection>
@@ -132,7 +132,11 @@ function FamilyCard({
     >
       <span
         dir="rtl"
-        style={{ fontFamily: "var(--font-amiri)", fontSize: 22, color: "#c9a24b" }}
+        style={{
+          fontFamily: "var(--font-amiri)",
+          fontSize: 22,
+          color: "#c9a24b",
+        }}
       >
         ☽
       </span>
@@ -199,14 +203,14 @@ export function Family() {
           relation="Son of"
           parent1="Ummer Koya"
           parent2="Zeenath Ummer Koya"
-          residence="Kozhikode, Kerala"
+          residence="Mannur Rail, Kozhikode, Kerala"
         />
         <FamilyCard
           title="Bride's Family"
           relation="Daughter of"
-          parent1="[ Father's Name ]"
-          parent2="[ Mother's Name ]"
-          residence="[ Town, Kerala ]"
+          parent1="Sudheer Khan V"
+          parent2="Sara P"
+          residence="Farook College, Kozhikode, Kerala"
         />
       </div>
     </RevealSection>
@@ -271,7 +275,12 @@ export function WeddingDetails() {
           margin: "0 auto",
         }}
       >
-        <DetailCard icon="☽" iconSize={26} label="Occasion" title="Nikah & Walima">
+        <DetailCard
+          icon="☽"
+          iconSize={26}
+          label="Occasion"
+          title="Reception & Nikah"
+        >
           <p style={{ fontStyle: "italic", color: "#bdb39c", margin: 0 }}>
             Islamic Marriage
           </p>
@@ -353,8 +362,8 @@ export function QuranVerse() {
           margin: "0 auto 34px",
         }}
       >
-        وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا
-        إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً
+        وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا
+        لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً
       </p>
       <p
         style={{
@@ -452,7 +461,7 @@ export function Blessings() {
           </p>
         </BlessingCard>
 
-        <BlessingCard>
+        {/* <BlessingCard>
           <p
             dir="rtl"
             style={{
@@ -463,8 +472,8 @@ export function Blessings() {
               margin: "0 0 14px",
             }}
           >
-            بَارَكَ اللَّهُ لَكُمَا وَبَارَكَ عَلَيْكُمَا وَجَمَعَ بَيْنَكُمَا فِي
-            خَيْرٍ
+            بَارَكَ اللَّهُ لَكُمَا وَبَارَكَ عَلَيْكُمَا وَجَمَعَ بَيْنَكُمَا
+            فِي خَيْرٍ
           </p>
           <p
             style={{
@@ -489,7 +498,7 @@ export function Blessings() {
           >
             — Prophetic Dua
           </p>
-        </BlessingCard>
+        </BlessingCard> */}
 
         <BlessingCard>
           <div
@@ -511,8 +520,9 @@ export function Blessings() {
               margin: "14px 0 16px",
             }}
           >
-            A beautiful journey begins today. May every step you take together be
-            guided by His mercy. Wishing you a lifetime of happiness and barakah.
+            A beautiful journey begins today. May every step you take together
+            be guided by His mercy. Wishing you a lifetime of happiness and
+            barakah.
           </p>
           <p
             style={{

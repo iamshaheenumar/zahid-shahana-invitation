@@ -1,9 +1,40 @@
+import { CSSProperties } from "react";
+
 const goldText = {
   background: "linear-gradient(135deg,#f4e3ad,#c9a24b 50%,#a8842f)",
   WebkitBackgroundClip: "text",
   backgroundClip: "text",
   color: "transparent",
 } as const;
+
+// shared look for each engraved gold door leaf
+const doorBase: CSSProperties = {
+  position: "absolute",
+  top: 0,
+  height: "100%",
+  width: "50%",
+  overflow: "hidden",
+  backfaceVisibility: "hidden",
+  WebkitBackfaceVisibility: "hidden",
+  // deliberate, weighty swing — front-loaded easing so it settles open
+  transition: "transform 2s cubic-bezier(0.66, 0, 0.16, 1) 0.45s",
+};
+
+const doorFrame: CSSProperties = {
+  position: "absolute",
+  inset: 12,
+  border: "1px solid rgba(58,46,16,0.4)",
+  borderRadius: 4,
+  pointerEvents: "none",
+};
+
+const doorFlourish: CSSProperties = {
+  position: "absolute",
+  top: 9,
+  color: "#5a4517",
+  fontSize: 15,
+  opacity: 0.7,
+};
 
 export default function Landing({
   showScratch,
@@ -15,6 +46,28 @@ export default function Landing({
   onReveal: () => void;
 }) {
   const showCover = showScratch && !revealed;
+
+  const leftDoor: CSSProperties = {
+    ...doorBase,
+    left: 0,
+    borderRadius: "14px 0 0 14px",
+    transformOrigin: "left center",
+    transform: revealed ? "rotateY(108deg)" : "rotateY(0deg)",
+    background:
+      "linear-gradient(100deg,#efdc97 0%,#c9a24b 46%,#9c7a2c 78%,#6c521a 100%)",
+    boxShadow: "inset -12px 0 24px rgba(28,18,2,0.5)",
+  };
+
+  const rightDoor: CSSProperties = {
+    ...doorBase,
+    left: "50%",
+    borderRadius: "0 14px 14px 0",
+    transformOrigin: "right center",
+    transform: revealed ? "rotateY(-108deg)" : "rotateY(0deg)",
+    background:
+      "linear-gradient(260deg,#efdc97 0%,#c9a24b 46%,#9c7a2c 78%,#6c521a 100%)",
+    boxShadow: "inset 12px 0 24px rgba(28,18,2,0.5)",
+  };
 
   return (
     <section
@@ -255,12 +308,14 @@ export default function Landing({
           </div>
         </div>
 
-        {/* tappable foil cover — animates away on click to reveal the card */}
+        {/* gold double doors — swing open on tap to reveal the card */}
         {showScratch && (
           <button
             type="button"
             onClick={onReveal}
-            aria-label="Tap to reveal the invitation"
+            disabled={revealed}
+            aria-label="Tap to open the invitation"
+            data-cover
             style={{
               position: "absolute",
               inset: 0,
@@ -268,32 +323,77 @@ export default function Landing({
               height: "100%",
               padding: 0,
               border: "none",
+              background: "transparent",
               borderRadius: 14,
-              overflow: "hidden",
+              perspective: 1500,
               cursor: revealed ? "default" : "pointer",
               pointerEvents: revealed ? "none" : "auto",
-              background:
-                "linear-gradient(135deg,#a8842f,#e6cf86 40%,#c9a24b 60%,#8f6f28)",
-              boxShadow: "inset 0 0 0 3px rgba(20,28,24,0.25)",
-              animation: revealed ? "zsFoilAway .9s ease forwards" : undefined,
+              zIndex: 3,
             }}
           >
-            {/* shimmer sweep */}
+            {/* warm light spilling over the card as the doors part */}
             <span
+              aria-hidden
               style={{
                 position: "absolute",
-                top: 0,
-                left: 0,
-                width: "45%",
-                height: "100%",
+                inset: 0,
+                borderRadius: 14,
                 background:
-                  "linear-gradient(90deg,transparent,rgba(255,255,255,0.55),transparent)",
-                animation: "zsShimmer 3.4s ease-in-out infinite",
+                  "radial-gradient(60% 52% at 50% 45%, rgba(244,227,173,0.6), rgba(201,162,75,0.12) 55%, transparent 76%)",
+                opacity: 0,
+                animation: revealed
+                  ? "zsRevealGlow 2.6s ease 0.5s forwards"
+                  : undefined,
                 pointerEvents: "none",
               }}
             />
-            {/* seal + prompt */}
+
+            {/* left leaf */}
+            <span aria-hidden style={leftDoor}>
+              <span style={doorFrame} />
+              <span style={{ ...doorFlourish, left: 11 }}>❧</span>
+            </span>
+            {/* right leaf */}
+            <span aria-hidden style={rightDoor}>
+              <span style={doorFrame} />
+              <span
+                style={{ ...doorFlourish, right: 11, transform: "scaleX(-1)" }}
+              >
+                ❧
+              </span>
+            </span>
+
+            {/* shimmer hinting the closed doors are tappable — clipped to the
+                card so the sweep never spills past its edges */}
+            {!revealed && (
+              <span
+                aria-hidden
+                style={{
+                  position: "absolute",
+                  inset: 0,
+                  borderRadius: 14,
+                  overflow: "hidden",
+                  pointerEvents: "none",
+                }}
+              >
+                <span
+                  style={{
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                    width: "40%",
+                    height: "100%",
+                    background:
+                      "linear-gradient(90deg,transparent,rgba(255,255,255,0.5),transparent)",
+                    animation: "zsShimmer 3.6s ease-in-out infinite",
+                  }}
+                />
+              </span>
+            )}
+
+            {/* wax seal + prompt — flares and breaks on tap */}
             <span
+              aria-hidden
               style={{
                 position: "absolute",
                 inset: 0,
@@ -303,6 +403,11 @@ export default function Landing({
                 justifyContent: "center",
                 gap: 16,
                 color: "#3a2e10",
+                zIndex: 4,
+                pointerEvents: "none",
+                animation: revealed
+                  ? "zsSealBreak 0.7s ease forwards"
+                  : undefined,
               }}
             >
               <span
@@ -310,11 +415,15 @@ export default function Landing({
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  width: 64,
-                  height: 64,
+                  width: 70,
+                  height: 70,
                   borderRadius: "50%",
-                  border: "1.5px solid rgba(58,46,16,0.55)",
-                  fontSize: 26,
+                  border: "1.5px solid rgba(58,46,16,0.6)",
+                  boxShadow:
+                    "0 0 0 5px rgba(58,46,16,0.12), inset 0 0 14px rgba(255,247,214,0.5)",
+                  background:
+                    "radial-gradient(circle at 50% 38%, #f7ead9, #d8bd72 60%, #b9974a)",
+                  fontSize: 27,
                   animation: "zsFloat 4s ease-in-out infinite",
                 }}
               >
@@ -329,9 +438,31 @@ export default function Landing({
                   fontWeight: 600,
                 }}
               >
-                Tap to Reveal
+                Tap to Open
               </span>
             </span>
+
+            {/* light bloom at the seam the instant the seal gives way */}
+            {revealed && (
+              <span
+                aria-hidden
+                style={{
+                  position: "absolute",
+                  top: "44%",
+                  left: "50%",
+                  width: 130,
+                  height: 130,
+                  marginTop: -65,
+                  marginLeft: -65,
+                  borderRadius: "50%",
+                  background:
+                    "radial-gradient(circle, rgba(255,250,230,0.95), rgba(244,227,173,0.4) 45%, transparent 70%)",
+                  animation: "zsFlash 0.75s ease-out forwards",
+                  pointerEvents: "none",
+                  zIndex: 5,
+                }}
+              />
+            )}
           </button>
         )}
       </div>
@@ -345,7 +476,7 @@ export default function Landing({
             color: "#8f876f",
           }}
         >
-          ✦ Tap the card to reveal your invitation ✦
+          ✦ Tap to open your invitation ✦
         </p>
       )}
 
