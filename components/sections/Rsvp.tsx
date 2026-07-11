@@ -21,13 +21,15 @@ const fieldStyle = {
 
 export default function Rsvp() {
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
   const nameRef = useRef<HTMLInputElement>(null);
   const guestsRef = useRef<HTMLInputElement>(null);
   const attendRef = useRef<HTMLSelectElement>(null);
   const msgRef = useRef<HTMLTextAreaElement>(null);
 
-  const onSubmit = (e: FormEvent) => {
+  const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
+    setSubmitting(true);
     const rec = {
       name: nameRef.current?.value ?? "",
       guests: guestsRef.current?.value ?? "",
@@ -35,6 +37,7 @@ export default function Rsvp() {
       msg: msgRef.current?.value ?? "",
       at: Date.now(),
     };
+    // Local backup so a response is never lost, even offline.
     try {
       const arr = JSON.parse(localStorage.getItem("zs_rsvp") || "[]");
       arr.push(rec);
@@ -42,6 +45,21 @@ export default function Rsvp() {
     } catch {
       /* localStorage unavailable */
     }
+    // Send to the Google Sheet via the Apps Script Web App.
+    const url = process.env.NEXT_PUBLIC_RSVP_URL;
+    if (url) {
+      try {
+        await fetch(url, {
+          method: "POST",
+          mode: "no-cors",
+          headers: { "Content-Type": "text/plain;charset=utf-8" },
+          body: JSON.stringify(rec),
+        });
+      } catch {
+        /* network failed — localStorage backup still holds it */
+      }
+    }
+    setSubmitting(false);
     setSubmitted(true);
   };
 
@@ -94,17 +112,6 @@ export default function Rsvp() {
               "linear-gradient(180deg, rgba(201,162,75,0.08), rgba(255,255,255,0.012))",
           }}
         >
-          <p
-            dir="rtl"
-            style={{
-              fontFamily: "var(--font-amiri)",
-              fontSize: 28,
-              color: "#e6cf86",
-              margin: "0 0 16px",
-            }}
-          >
-            جَزَاكُمُ اللَّهُ خَيْرًا
-          </p>
           <p
             style={{
               fontFamily: "var(--font-cormorant)",
@@ -174,6 +181,7 @@ export default function Rsvp() {
           </div>
           <button
             type="submit"
+            disabled={submitting}
             style={{
               marginTop: 6,
               fontFamily: "var(--font-eb-garamond)",
@@ -185,10 +193,11 @@ export default function Rsvp() {
               border: "none",
               padding: 16,
               borderRadius: 30,
-              cursor: "pointer",
+              cursor: submitting ? "wait" : "pointer",
+              opacity: submitting ? 0.7 : 1,
             }}
           >
-            Send Our Blessing
+            {submitting ? "Sending…" : "Send Our Blessing"}
           </button>
         </form>
       )}

@@ -90,8 +90,8 @@ export default function Invitation({
       <Family />
       <WeddingDetails />
       {showCountdown && <Countdown />}
-      <QuranVerse />
-      <Blessings />
+      {/* <QuranVerse /> */}
+      {/* <Blessings /> */}
       {showRsvp && <Rsvp />}
       <Footer />
 

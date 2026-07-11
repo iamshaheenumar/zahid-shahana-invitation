@@ -36,17 +36,6 @@ export function DateBlock() {
     <RevealSection style={{ padding: "60px 24px 96px", textAlign: "center" }}>
       <div style={{ maxWidth: 560, margin: "0 auto" }}>
         <p
-          dir="rtl"
-          style={{
-            fontFamily: "var(--font-amiri)",
-            fontSize: 18,
-            color: "#a89263",
-            margin: "0 0 22px",
-          }}
-        >
-          وَلِيمَة
-        </p>
-        <p
           style={{
             fontFamily: "var(--font-eb-garamond)",
             fontSize: 13,
@@ -279,11 +268,12 @@ export function WeddingDetails() {
           icon="☽"
           iconSize={26}
           label="Occasion"
-          title="Reception & Nikah"
+          title="Marriage Reception"
         >
-          <p style={{ fontStyle: "italic", color: "#bdb39c", margin: 0 }}>
-            Islamic Marriage
-          </p>
+          <></>
+          {/* <p style={{ fontStyle: "italic", color: "#bdb39c", margin: 0 }}>
+            Marriage Reception
+          </p> */}
         </DetailCard>
 
         <DetailCard
@@ -293,7 +283,7 @@ export function WeddingDetails() {
           title="August 12, 2026"
         >
           <p style={{ fontStyle: "italic", color: "#bdb39c", margin: 0 }}>
-            Wednesday · 4:00 – 9:00 PM
+            Wednesday · 6:00 – 9:00 PM
           </p>
         </DetailCard>
 
@@ -351,20 +341,6 @@ export function QuranVerse() {
       }}
     >
       <p style={{ ...eyebrow, margin: "0 0 36px" }}>Word of Allah</p>
-      <p
-        dir="rtl"
-        style={{
-          fontFamily: "var(--font-amiri)",
-          fontSize: "clamp(24px,4.5vw,34px)",
-          lineHeight: 2.1,
-          color: "#e6cf86",
-          maxWidth: 760,
-          margin: "0 auto 34px",
-        }}
-      >
-        وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا
-        لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً
-      </p>
       <p
         style={{
           fontFamily: "var(--font-cormorant)",
@@ -563,17 +539,6 @@ export function Footer() {
         We humbly request your presence, your blessings, and your duas on this
         most sacred day.
       </p>
-      <p
-        dir="rtl"
-        style={{
-          fontFamily: "var(--font-amiri)",
-          fontSize: 30,
-          color: "#e6cf86",
-          margin: "0 0 24px",
-        }}
-      >
-        آمين
-      </p>
       <h3
         style={{
           fontFamily: "var(--font-cormorant)",
@@ -585,17 +550,6 @@ export function Footer() {
       >
         Zahid &amp; Shahana
       </h3>
-      <p
-        dir="rtl"
-        style={{
-          fontFamily: "var(--font-amiri)",
-          fontSize: 20,
-          color: "#a89263",
-          margin: "6px 0 0",
-        }}
-      >
-        بَارَكَ اللَّهُ لَكُمَا
-      </p>
     </footer>
   );
 }

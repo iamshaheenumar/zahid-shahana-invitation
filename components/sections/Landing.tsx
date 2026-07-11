@@ -172,22 +172,49 @@ export default function Landing({
             />
             {/* corner flourishes */}
             <span
-              style={{ position: "absolute", top: 8, left: 11, color: "#c9a24b", fontSize: 15 }}
+              style={{
+                position: "absolute",
+                top: 8,
+                left: 11,
+                color: "#c9a24b",
+                fontSize: 15,
+              }}
             >
               ❧
             </span>
             <span
-              style={{ position: "absolute", top: 8, right: 11, color: "#c9a24b", fontSize: 15, transform: "scaleX(-1)" }}
+              style={{
+                position: "absolute",
+                top: 8,
+                right: 11,
+                color: "#c9a24b",
+                fontSize: 15,
+                transform: "scaleX(-1)",
+              }}
             >
               ❧
             </span>
             <span
-              style={{ position: "absolute", bottom: 8, left: 11, color: "#c9a24b", fontSize: 15, transform: "scaleY(-1)" }}
+              style={{
+                position: "absolute",
+                bottom: 8,
+                left: 11,
+                color: "#c9a24b",
+                fontSize: 15,
+                transform: "scaleY(-1)",
+              }}
             >
               ❧
             </span>
             <span
-              style={{ position: "absolute", bottom: 8, right: 11, color: "#c9a24b", fontSize: 15, transform: "scale(-1,-1)" }}
+              style={{
+                position: "absolute",
+                bottom: 8,
+                right: 11,
+                color: "#c9a24b",
+                fontSize: 15,
+                transform: "scale(-1,-1)",
+              }}
             >
               ❧
             </span>
@@ -292,7 +319,7 @@ export default function Landing({
                 margin: "7px 0 0",
               }}
             >
-              Wednesday · 4 – 9 PM
+              Wednesday · 6 – 9 PM
             </p>
             <p
               style={{
