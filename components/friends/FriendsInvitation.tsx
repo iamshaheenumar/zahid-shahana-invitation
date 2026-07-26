@@ -12,9 +12,8 @@ interface FriendsInvitationProps {
   showRsvp?: boolean;
 }
 
-const MAPS_URL_1 = "https://share.google.com/UpDw59f1lDgG9ruP0";
-const MAPS_URL =
-  "https://www.google.com/maps/dir//AMBIENCE+Auditorium,+Kadalundi+Road,+Kashayapadi,+Feroke,+Kozhikode,+Kerala+673631,+India/@11.1618863,75.845392,15z";
+const MAPS_URL_1 = "https://share.google/IsNSVaxNgXooy4p6d";
+const MAPS_URL = "https://share.google/FBHfmFp5Vjb65VY7q";
 
 // dusty-rose / blush palette (from the "Friends Invite" Claude Design)
 const ROSE = "#a86571"; // names, headings, script accents
@@ -614,9 +613,6 @@ export default function FriendsInvitation({
           <div style={detailCard}>
             <p style={detailLabel}>When</p>
             <p style={detailScript}>12 August 2026</p>
-            {/* <p style={{ fontSize: 16, color: "#6f5852", margin: "4px 0 0" }}>
-              4 – 9 in the evening
-            </p> */}
           </div>
           <div style={detailCard}>
             <p style={detailLabel}>Nikah</p>
