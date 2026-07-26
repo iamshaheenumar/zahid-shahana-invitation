@@ -1,11 +1,24 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, EB_Garamond, Amiri } from "next/font/google";
+import {
+  Cormorant_Garamond,
+  EB_Garamond,
+  Amiri,
+  Great_Vibes,
+} from "next/font/google";
 import "./globals.css";
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
   weight: ["500", "600", "700"],
   variable: "--font-cormorant",
+  display: "swap",
+});
+
+// Flowing script used across the "Friends Invite" variant (/friends).
+const greatVibes = Great_Vibes({
+  subsets: ["latin"],
+  weight: ["400"],
+  variable: "--font-great-vibes",
   display: "swap",
 });
 
@@ -59,7 +72,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${cormorant.variable} ${ebGaramond.variable} ${amiri.variable}`}
+        className={`${cormorant.variable} ${ebGaramond.variable} ${amiri.variable} ${greatVibes.variable}`}
       >
         {children}
       </body>

@@ -16,6 +16,7 @@ function Unit({ value, label }: { value: string; label: string }) {
       }}
     >
       <div
+        suppressHydrationWarning
         style={{
           fontFamily: "var(--font-cormorant)",
           fontSize: 52,

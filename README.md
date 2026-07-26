@@ -29,8 +29,9 @@ npm run start    # serve the production build
 ```
 app/
   layout.tsx          # fonts + metadata
-  page.tsx            # renders <Invitation />
-  globals.css         # base styles + keyframes
+  page.tsx            # renders <Invitation /> (the main, dark-gold invite)
+  friends/page.tsx    # renders <FriendsInvitation /> (the /friends variant)
+  globals.css         # base styles + keyframes (+ .friends-root scoped styles)
 components/
   Invitation.tsx      # client orchestrator: root, ornaments, section layout
   hooks.ts            # useCountdown, useScrollReveal, useScratchReveal
@@ -41,7 +42,31 @@ components/
     Countdown.tsx     # live countdown
     Rsvp.tsx          # RSVP form
     Static.tsx        # date, family, details, verse, blessings, footer
+  friends/            # the "Friends Invite" variant (/friends)
+    FriendsInvitation.tsx  # orchestrator: cover reveal, arch, note, details, footer
+    FriendsCountdown.tsx   # sage countdown (reuses useCountdown)
+    FriendsRsvp.tsx        # sage RSVP form (localStorage key: zs_friends_rsvp)
+    FriendsMusicToggle.tsx # sage spinning-record music button
+    Botanicals.tsx         # watercolor greenery (WebP from public/friends/)
+    CoupleFigures.tsx      # inline-SVG groom + bride for the arch
+public/friends/            # optimized watercolor assets (WebP, transparent)
 ```
+
+## The "Friends Invite" variant — `/friends`
+
+A second, lighter invitation implemented from the Claude Design source
+`Zahid and Shahana - Friends Invite.dc.html` — sage-green / cream palette,
+Great Vibes script, a full-screen **"Open Invitation"** reveal cover, a foliage
+**arch** with the couple, a *Dear Friends* note, When/Where cards, countdown,
+RSVP, and a wildflower footer. It lives at `/friends`; the original invite at
+`/` is untouched.
+
+The design's watercolor botanicals (palm frond, monstera, bouquets, grass,
+footer bush) live in `public/friends/` as **optimized WebP** — resized and
+compressed from the originals (~47 MB total → ~1.1 MB, transparency preserved)
+and served through the small components in `Botanicals.tsx`. The never-filled
+"cartoon couple" image slots are drawn as **stylised SVG figures**
+(`CoupleFigures.tsx`); swap in real artwork by editing that file.
 
 ## Customising
 
@@ -51,3 +76,6 @@ components/
 - **Background music**: drop an audio file at `public/assets/bg-music.mp3`.
 - The three sections (scratch, countdown, RSVP) can be toggled via the
   `showScratch` / `showCountdown` / `showRsvp` props on `<Invitation />` in `app/page.tsx`.
+- The **`/friends`** variant toggles its countdown / RSVP via `showCountdown` /
+  `showRsvp` on `<FriendsInvitation />` in `app/friends/page.tsx`. Its names,
+  date, venue and copy live directly in `components/friends/FriendsInvitation.tsx`.
