@@ -1,7 +1,6 @@
 import RevealSection from "@/components/RevealSection";
 import { useCountdown } from "@/components/hooks";
-
-const WEDDING_ISO = "2026-08-12T16:00:00";
+import { WEDDING_ISO } from "@/components/weddingDate";
 
 function Unit({ value, label }: { value: string; label: string }) {
   return (
@@ -16,7 +15,6 @@ function Unit({ value, label }: { value: string; label: string }) {
       }}
     >
       <div
-        suppressHydrationWarning
         style={{
           fontFamily: "var(--font-cormorant)",
           fontSize: 52,

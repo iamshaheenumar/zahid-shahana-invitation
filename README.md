@@ -72,7 +72,8 @@ and served through the small components in `Botanicals.tsx`. The never-filled
 
 - **Names / dates / venue** live in `components/sections/Landing.tsx` and `Static.tsx`.
 - The **bride's family** placeholders (`[ Father's Name ]`, etc.) are in `Static.tsx` → `Family`.
-- The **countdown target** is `WEDDING_ISO` in `components/sections/Countdown.tsx`.
+- The **countdown target** is `WEDDING_ISO` in `components/weddingDate.ts` (shared by
+  both invites, pinned to venue time `+05:30`).
 - **Background music**: drop an audio file at `public/assets/bg-music.mp3`.
 - The three sections (scratch, countdown, RSVP) can be toggled via the
   `showScratch` / `showCountdown` / `showRsvp` props on `<Invitation />` in `app/page.tsx`.

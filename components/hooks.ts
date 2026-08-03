@@ -18,17 +18,31 @@ function calc(target: number): Countdown {
   };
 }
 
-/** Live countdown to the wedding, ticking every second. */
+/**
+ * Placeholder rendered on the server and on the first client render, so both
+ * agree and hydration has nothing to patch. The real numbers only exist after
+ * mount — see `useCountdown`.
+ */
+const PENDING: Countdown = { days: "–", hours: "––", mins: "––", secs: "––" };
+
+/**
+ * Live countdown to the wedding, ticking every second.
+ *
+ * Deliberately renders `PENDING` until mounted: a server-rendered number would
+ * be baked into the static HTML at build time, and hydration would leave that
+ * stale value sitting in the DOM.
+ */
 export function useCountdown(targetISO: string): Countdown {
-  const target = new Date(targetISO).getTime();
-  const [cd, setCd] = useState<Countdown>(() => calc(target));
+  const [cd, setCd] = useState<Countdown | null>(null);
 
   useEffect(() => {
+    const target = new Date(targetISO).getTime();
+    setCd(calc(target));
     const id = setInterval(() => setCd(calc(target)), 1000);
     return () => clearInterval(id);
-  }, [target]);
+  }, [targetISO]);
 
-  return cd;
+  return cd ?? PENDING;
 }
 
 /**
